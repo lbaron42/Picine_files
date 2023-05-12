@@ -1,0 +1,168 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+long my_atoi(const char* S)
+{
+    long num = 0;
+ 
+    int i = 0;
+ 
+    while (S[i] && (S[i] >= '0' && S[i] <= '9'))
+    {
+        num = num * 10 + (S[i] - '0');
+        i++;
+    }
+ 
+    return num;
+}
+
+int	ft_strlen(char *str)
+{
+	int	n;
+
+	n = 0;
+	while (str[n] != 0)
+		++n;
+	return (n);
+}
+
+int	is_numeric(char *str)
+{
+	while (*str != '\0')
+	{
+		if (!('9' >= *str && *str >= '0'))
+			return (0);
+		++str;
+	}
+	return (1);
+}
+
+int	inspace(char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str != ' ')
+			return (0);
+		++str;
+	}
+	return (1);
+}
+
+
+int main(int argc, char **argv) 
+{   
+    int col_top[4];
+    int col_bot[4];
+    int row_top[4];
+    int row_bot[4];
+  
+    col_top[0] = my_atoi(&argv[1][0]);
+    col_top[1] = my_atoi(&argv[1][2]);
+    col_top[2] = my_atoi(&argv[1][4]);
+    col_top[3] = my_atoi(&argv[1][6]);
+
+    col_bot[0] = my_atoi(&argv[1][8]);
+    col_bot[1] = my_atoi(&argv[1][10]);
+    col_bot[2] = my_atoi(&argv[1][12]);
+    col_bot[3] = my_atoi(&argv[1][14]);
+
+    row_top[0] = my_atoi(&argv[1][16]);
+    row_top[1] = my_atoi(&argv[1][18]);
+    row_top[2] = my_atoi(&argv[1][20]);
+    row_top[3] = my_atoi(&argv[1][22]);
+
+    row_bot[0] = my_atoi(&argv[1][24]);
+    row_bot[1] = my_atoi(&argv[1][26]);
+    row_bot[2] = my_atoi(&argv[1][28]);
+    row_bot[3] = my_atoi(&argv[1][30]);
+
+      int s; 
+      int i; 
+      int a;
+     
+      i = 0;
+                                                                             
+      char *nums = malloc(sizeof(char) * 16);
+      char *spaces = malloc(sizeof(char) * 15);
+  
+       s = 1;
+       i = 0;
+       a = 0;
+      while(i <= 16)
+      {  
+        spaces[i] = argv[1][s];
+        nums[i] = argv[1][a];
+        s = s + 2;
+        a = a + 2;
+        i++;
+      }
+      int n = is_numeric(nums);
+      int t = inspace(spaces);
+      int numslen = ft_strlen(nums);
+      int spacelen = ft_strlen(spaces);
+       
+       if(n == 1 || t == 0 || numslen != 17 || spacelen != 15)
+       {
+         printf("%s\n", "Error");
+       }
+       else if  ((col_top[0] + col_bot[0] > 5) || (col_top[0] + col_bot[0] < 3)
+           || (col_top[1] + col_bot[1] > 5) || (col_top[1] + col_bot[1] < 3)
+           || (col_top[2] + col_bot[2] > 5) || (col_top[2] + col_bot[2] < 3)
+           || (col_top[3] + col_bot[3] > 5) || (col_top[3] + col_bot[3] < 3)
+           || (row_top[0] + row_bot[0] > 5) || (row_top[0] + row_bot[0] < 3)
+           || (row_top[1] + row_bot[1] > 5) || (row_top[1] + row_bot[1] < 3)
+           || (row_top[2] + row_bot[2] > 5) || (row_top[2] + row_bot[2] < 3)
+           || (row_top[3] + row_bot[3] > 5) || (row_top[3] + row_bot[3] < 3)
+           || (argc != 2 ))
+        {
+           printf("%s\n", "Error");
+        }
+        else if ((col_top[0] > 4 || col_top[0] <= 0) 
+                || (col_top[1] > 4 || col_top[1] <= 0) 
+                || (col_top[2] > 4 || col_top[2] <= 0)
+                || (col_top[3] > 4 || col_top[3] <= 0)
+                || (col_bot[0] > 4 || col_bot[0] <= 0)
+                || (col_bot[1] > 4 || col_bot[1] <= 0)
+                || (col_bot[2] > 4 || col_bot[2] <= 0)
+                || (col_bot[3] > 4 || col_bot[3] <= 0)
+                || (row_top[0] > 4 || row_top[0] <= 0)
+                || (row_top[1] > 4 || row_top[1] <= 0)
+                || (row_top[2] > 4 || row_top[2] <= 0)  
+                || (row_top[3] > 4 || row_top[3] <= 0)
+                || (row_bot[0] > 4 || row_bot[0] <= 0)
+                || (row_bot[1] > 4 || row_bot[1] <= 0)
+                || (row_bot[2] > 4 || row_bot[2] <= 0)
+                || (row_bot[3] > 4 || row_bot[3] <= 0))  
+        {
+          printf("%s\n", "Error");
+        } 
+        else
+        {
+       int matrix[4][4] =	{
+		    {0, 0, 0, 0},
+		    {0, 0, 0, 0},
+		    {0, 0, 0, 0},
+		    {0, 0, 0, 0}
+	      };
+
+    
+	      	printf("         c  c  c  c\n");
+	        printf("         0  1  2  3\n");
+          printf("         %d  %d  %d  %d\n",
+          col_top[0], col_top[1], col_top[2], col_top[3]);
+	        printf("         |  |  |  |\n");
+	        printf("r 0 %d -- %d  %d  %d  %d -- %d\n",                      row_top[0], matrix[0][0],matrix[0][1], 
+            matrix[0][2], matrix[0][3], row_bot[0]);
+	        printf("r 1 %d -- %d  %d  %d  %d -- %d\n",                      row_top[1], matrix[1][0],matrix[1][1],
+            matrix[1][2], matrix[1][3], row_bot[1]);
+	        printf("r 2 %d -- %d  %d  %d  %d -- %d\n",                      row_top[2], matrix[2][0], matrix[2][1], 
+            matrix[2][2],   matrix[2][3], row_bot[2]);
+	        printf("r 3 %d -- %d  %d  %d  %d -- %d\n",                      row_top[3], matrix[3][0], matrix[3][1],
+            matrix[3][2], matrix[3][3], row_bot[3]);
+          printf("         |  |  |  |\n");
+          printf("         %d  %d  %d  %d\n",
+          col_bot[0], col_bot[1], col_bot[2], col_bot[3]);
+        }
+  free(nums);
+  free(spaces);
+  }
